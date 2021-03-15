@@ -1,0 +1,6 @@
+Fiat 126p 1990 600 500000 reczna
+Honda Acord 2006 1800 300000 reczna
+Honda Civic 2003 1600 300000 reczna
+Mercedes AMG 2015 2500 10000 automatyczna
+Mercedes AMG 2015 3000 150000 automatyczna
+Toyota Yaris 2005 1600 300000 reczna
