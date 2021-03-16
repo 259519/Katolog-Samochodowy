@@ -18,7 +18,6 @@ public:
     int pojemność;
     float przebieg;
     string skrzynia;
-    Pojazd() {};
     Pojazd(bool autko)
     {
         cout << "Podaj marke pojazdu: ";
@@ -44,12 +43,13 @@ public:
         cout << skrzynia << " ";
         cout << endl;
     }
+    Pojazd() {};
 };
-void zapisywanie(vector <Pojazd> katalog)
+void zapisywanie(vector <Pojazd> Auta)
 {
     ofstream plik;
     plik.open("katalog.txt");
-    for (Pojazd pojazd : katalog)
+    for (Pojazd pojazd : Auta)
     {
         plik << pojazd.marka << " ";
         plik << pojazd.model << " ";
@@ -61,11 +61,11 @@ void zapisywanie(vector <Pojazd> katalog)
     }
     plik.close();
 }
-void wypisywanie(vector <Pojazd> katalog)
+void wypisywanie(vector <Pojazd> Auta)
 {
-    for (Pojazd pojazd : katalog)
+    for (Pojazd Pojazd : Auta)
     {
-        pojazd.wypisz();
+        Pojazd.wypisz();
     }
 }
 void wypisz_pojazd(Pojazd car)
@@ -78,34 +78,34 @@ void wypisz_pojazd(Pojazd car)
     cout << car.skrzynia << " ";
     cout << endl;
 }
-vector <Pojazd> wczyt_katalog()
+vector <Pojazd> wczytaj_Auta()
 {
-    vector <Pojazd> katalog;
-    Pojazd pojazd{};
+    vector <Pojazd> Auta;
+    Pojazd Pojazd{};
     ifstream plik;
     plik.open("katalog.txt");
     while (plik.peek() != EOF)
     {
-        plik >> pojazd.marka;
-        plik >> pojazd.model;
-        plik >> pojazd.rocznik;
-        plik >> pojazd.pojemność;
-        plik >> pojazd.przebieg;
-        plik >> pojazd.skrzynia;
+        plik >> Pojazd.marka;
+        plik >> Pojazd.model;
+        plik >> Pojazd.rocznik;
+        plik >> Pojazd.pojemność;
+        plik >> Pojazd.przebieg;
+        plik >> Pojazd.skrzynia;
 
         if (!plik.eof())
         {
-            katalog.push_back(pojazd);
+            Auta.push_back(Pojazd);
         }
     }
     plik.close();
-    return katalog;
+    return Auta;
 }
 
 int main()
 {
-    vector <Pojazd> katalog;
-    katalog = wczyt_katalog();
+    vector <Pojazd> Auta;
+    Auta = wczytaj_Auta();
     Pojazd car;
     while (wybór != 7)
     {
@@ -127,18 +127,18 @@ int main()
         {
         case '1':
         {
-            cout << "Wprowadz pojazd do bazy:\n " << endl;
+            cout << "Wprowadz pojazd do katalogu: " << endl;
             Pojazd wprowadzany_pojazd = Pojazd(true);
-            katalog.push_back(wprowadzany_pojazd);
-            zapisywanie(katalog);
-            cout << "Zapisano pomyslnie\n";
+            Auta.push_back(wprowadzany_pojazd);
+            zapisywanie(Auta);
+            cout << "Zapisano pomyslnie";
         }
         break;
 
         case '2':
         {
             cout << "Lista pojazdow: " << endl;
-            wypisywanie(katalog);
+            wypisywanie(Auta);
         }
         break;
 
@@ -298,18 +298,18 @@ int main()
             int numer;
             char opcja;
             cin >> numer;
-            if (numer > 0 && numer <= katalog.size()) 
+            if (numer > 0 && numer <= Auta.size()) 
             {
-                katalog[numer - 1].wypisz();
+                Auta[numer - 1].wypisz();
 
                 cout << "Czy chcesz usunac ten pojazd?" << endl << "tak-1" << endl << "nie-inny klawisz" << endl<<"Podaj opcje: ";
                 cin >> opcja;
                 if (opcja == '1')
                 {
-                    if (numer > 0 && numer <= katalog.size())
-                        katalog.erase(katalog.begin() + (numer - 1));
+                    if (numer > 0 && numer <= Auta.size())
+                        Auta.erase(Auta.begin() + (numer - 1));
 
-                    zapisywanie(katalog);
+                    zapisywanie(Auta);
                     cout << "Zapisano pomyslnie\n";
                 }
             }
@@ -321,7 +321,7 @@ int main()
 
         case '5':
         {
-            sort(katalog.begin(), katalog.end(), [](const Pojazd& x, const Pojazd& y) {
+            sort(Auta.begin(), Auta.end(), [](const Pojazd& x, const Pojazd& y) {
                 if (x.marka != y.marka)
                     return x.marka < y.marka;
                  else if (x.model != y.model)
@@ -335,7 +335,7 @@ int main()
                 else if (x.skrzynia != y.skrzynia)
                     return x.skrzynia < y.skrzynia;
                 });
-            wypisywanie(katalog);
+            wypisywanie(Auta);
 
 
         } break;
@@ -352,5 +352,3 @@ int main()
         system("cls");
     }
 }
-
-
