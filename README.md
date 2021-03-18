@@ -1,1 +1,1 @@
-# Katolog-Samochodowy
+# Katolog-Samochodowy - Jakub Andryszczak
