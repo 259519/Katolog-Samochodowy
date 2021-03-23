@@ -11,13 +11,18 @@ char wybór;
 
 class Pojazd
 {
-public:
     string marka;
     string model;
     int rocznik;
     int pojemność;
     float przebieg;
     string skrzynia;
+
+public:
+    friend int main();
+    friend vector <Pojazd> wczytaj_Auta();
+    friend void zapisywanie(vector <Pojazd> Auta);
+    friend void sortowanie(vector<Pojazd> Auta);
     Pojazd(bool autko)
     {
         cout << "Podaj marke pojazdu: ";
@@ -68,16 +73,6 @@ void wypisywanie(vector <Pojazd> Auta)
         Pojazd.wypisz();
     }
 }
-void wypisz_pojazd(Pojazd car)
-{
-    cout << car.marka << " ";
-    cout << car.model << " ";
-    cout << car.rocznik << " ";
-    cout << car.pojemność << " ";
-    cout << car.przebieg << " ";
-    cout << car.skrzynia << " ";
-    cout << endl;
-}
 vector <Pojazd> wczytaj_Auta()
 {
     vector <Pojazd> Auta;
@@ -100,6 +95,23 @@ vector <Pojazd> wczytaj_Auta()
     }
     plik.close();
     return Auta;
+}
+void sortowanie (vector<Pojazd> Auta){
+    sort(Auta.begin(), Auta.end(), [](const Pojazd& x, const Pojazd& y) {
+        if (x.marka != y.marka)
+            return x.marka < y.marka;
+        else if (x.model != y.model)
+            return x.model < y.model;
+        else if (x.rocznik != y.rocznik)
+            return x.rocznik < y.rocznik;
+        else if (x.pojemność != y.pojemność)
+            return x.pojemność < y.pojemność;
+        else if (x.przebieg != y.przebieg)
+            return x.przebieg < y.przebieg;
+        else if (x.skrzynia != y.skrzynia)
+            return x.skrzynia < y.skrzynia;
+        });
+    wypisywanie(Auta);
 }
 
 int main()
@@ -175,7 +187,7 @@ int main()
                         
                         if (!plik.eof())
                         {
-                            wypisz_pojazd(car);
+                            car.wypisz();
                         }
                     }
                 }
@@ -197,7 +209,7 @@ int main()
 
                         if (!plik.eof())
                         {
-                            wypisz_pojazd(car);
+                            car.wypisz();
                         }
                     }
                 }
@@ -219,7 +231,7 @@ int main()
                     {
                         if (!plik.eof())
                         {
-                            wypisz_pojazd(car);
+                            car.wypisz();
                         }
                     }
                 }
@@ -240,7 +252,7 @@ int main()
                     {
                         if (!plik.eof())
                         {
-                            wypisz_pojazd(car);
+                            car.wypisz();
                         }
                     }
                 }
@@ -261,7 +273,7 @@ int main()
                     {
                         if (!plik.eof())
                         {
-                            wypisz_pojazd(car);
+                            car.wypisz();
                         }
                     }
                 }
@@ -282,7 +294,7 @@ int main()
                     {
                         if (!plik.eof())
                         {
-                            wypisz_pojazd(car);
+                            car.wypisz();
                         }
                     }
                 }
@@ -321,24 +333,9 @@ int main()
 
         case '5':
         {
-            sort(Auta.begin(), Auta.end(), [](const Pojazd& x, const Pojazd& y) {
-                if (x.marka != y.marka)
-                    return x.marka < y.marka;
-                 else if (x.model != y.model)
-                    return x.model < y.model;
-                else if (x.rocznik != y.rocznik)
-                    return x.rocznik < y.rocznik;
-                else if (x.pojemność != y.pojemność)
-                    return x.pojemność < y.pojemność;
-                else if (x.przebieg != y.przebieg)
-                    return x.przebieg < y.przebieg;
-                else if (x.skrzynia != y.skrzynia)
-                    return x.skrzynia < y.skrzynia;
-                });
-            wypisywanie(Auta);
-
-
-        } break;
+            sortowanie(Auta);            
+        } 
+        break;
            
         case '6':
         {
